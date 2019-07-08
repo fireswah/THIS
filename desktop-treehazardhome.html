@@ -28,6 +28,8 @@ Task/Idea List:
 		<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <!-- Event-set Component -->
     <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+		<!-- Videoplayer Componenet -->
+		<script src="scripts/vid-control.js"></script>
 	</head>
 
 	<body>
@@ -42,26 +44,28 @@ Task/Idea List:
 				<a-asset-item id="ground-obj" src="models/terrain2.obj"></a-asset-item>
 				<a-asset-item id="firering-obj" src="models/firering.obj"></a-asset-item>
 				<a-asset-item id="subalp-obj" src="models/subalp.obj"></a-asset-item>
+				<video id="tutorialvid" src="video/THISIntroductionv1.mp4"></video>
 			</a-assets>
 
 			<!-- Setup Camera And Cursor -->
 			<a-entity
-				id="camera"
-				camera
-				look-controls
-				wasd-controls="fly: true"
+				id="camerarig"
 				position="5.3 1.6 11.123"
 				rotation="0 106 0">
-				<a-cursor
-					id="cursor"
-					animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
-					animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
-					animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
-					event-set__1="_event: mouseenter; color: springgreen"
-					event-set__2="_event: mouseleave; color: black"
-					fuse="true"
-					raycaster="objects: .link">
-				</a-cursor>
+				<a-camera id="camera"
+					look-controls
+					wasd-controls="fly: true">
+					<a-cursor
+						id="cursor"
+						animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+						animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+						animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
+						event-set__1="_event: mouseenter; color: springgreen"
+						event-set__2="_event: mouseleave; color: black"
+						fuse="true"
+						raycaster="objects: .link">
+					</a-cursor>
+				</a-camera>
 			</a-entity>
 
 			<!-- Setup Scene -->
@@ -86,22 +90,31 @@ Task/Idea List:
 				material="src: #groundtex; roughness: 1; metalness: 0">
 			</a-obj-model>
 
-			<a-obj-model
-				id="firering"
-				src="#firering-obj"
-				mtl=""
-				position="2.45 -1.47 9.16"
-				rotation="0 0 0"
-				scale=".1 .1 .1"
-				shadow
-				material="src: #fireringtex; repeat: 5 5; roughness: 1; metalness: .1">
-			</a-obj-model>
-
 			<a-box id="lake" height=".5" width="40" depth="40"
 				position="-14.94 -1.98 -7.64"
 				rotation="0 0 0"
 				material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
 			</a-box>
+
+			<a-entity id="campsite">
+				<a-obj-model
+					id="firering"
+					src="#firering-obj"
+					mtl=""
+					position="2.45 -1.47 9.16"
+					rotation="0 0 0"
+					scale=".1 .1 .1"
+					shadow
+					material="src: #fireringtex; repeat: 5 5; roughness: 1; metalness: .1">
+				</a-obj-model>
+				<a-entity id="videosetup"
+					position="1.469 -.536 12.314"
+					rotation="0 0 0">
+					<a-video id="vidscreen" src="#tutorialvid" width=".8" height=".45" position="0 .692 0" rotation="-30 110 0"></a-video>
+					<a-box id="playbutton" class="link" color="green" scale=".2 .2 .2" position=".04 -.427 -.6" vid-control="on: click; cmd: play"></a-box>
+					<a-cylinder id="stump" radius=".4"></a-cylinder>
+				</a-entity>
+			</a-entity>
 
 			<a-entity id="vegetation">
 				<!-- Clump -->

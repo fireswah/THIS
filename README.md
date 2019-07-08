@@ -10,3 +10,6 @@ Author: Matt Gibson
 		Training Specialist
 		Northern Rockies Training Center
 		Missoula, MT
+
+# NOTES
+-Don't forget a video sub-folder that includes the video THISIntrocutionv1.mp4 (Github only takes up to 25mb)
