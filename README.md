@@ -12,9 +12,11 @@ Author: Matt Gibson
 		Missoula, MT
 
 # NOTES
--Don't forget a video sub-folder that includes the video THISIntrocutionv1.mp4 (Github only takes up to 25mb)
+-Don't forget a video sub-folder that includes the video THISIntrocutionv1.mp4 (Github only takes files up to 25mb).  You can download the corrected codec version here:
 
--To update the uploaded version, copy and rename the desktop version html, then:
+	https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/Home/videos/THISIntroductionv1.mp4
+
+-To update the upload version, copy and rename the desktop version html, then:
 	
 	-upload resources to Amazon S3
 	
