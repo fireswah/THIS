@@ -1,24 +1,4 @@
 <!DOCTYPE html>
-<!--
-NRTC Tree Hazard Identification Simulation is designed as a portal to access
-numerous Tree Hazard Identification simulations utilizing Virtual Reality.
-This page links to various simulation exercises in the form of VR enabled 360
-photos, provides basic information and a tutorial for use.
-Author: Matt Gibson
-		Training Specialist
-		Northern Rockies Training Center
-		Missoula, MT
-Date Started: 052119
-Date Finished:
-
-Task/Idea List:
-	connect link in bottom of each tree scene to home page
-	 User would not have to leave VR to access all scenes
-  Tutorial video
-  Welcome sign with basic info to start.
-
--->
-
 <html>
 
 	<head>
@@ -36,7 +16,6 @@ Task/Idea List:
 		<a-scene>
 
 			<a-assets>
-				<!-- <img id="reflection" src="images/reflectup.png"> -->
 				<img id="displace" src="images/waterdisplacement.jpg">
 				<img id="groundtex" src="images/groundtex.png">
 				<img id="fireringtex" src="images/granitelichen.png">
@@ -69,32 +48,33 @@ Task/Idea List:
 			</a-entity>
 
 			<!-- Setup Scene -->
-			<a-light
-				color="#fdf3d7"
-				position="-25 18 -30"
-				intensity="1">
-			</a-light>
+			<a-entity
+				light="type: directional; color: #fdf3d7; intensity: 1; castShadow: true"
+				position="-25 30 -75">
+			</a-entity>
 
 			<a-sky
 				color="#00bfff">
 			</a-sky>
 
-			<a-obj-model
-				id="ground"
-				src="#ground-obj"
-				mtl=""
-				position="-7 -1 -11"
-				rotation="0 0 0"
-				scale="4 4 4"
-				shadow
-				material="src: #groundtex; roughness: 1; metalness: 0">
-			</a-obj-model>
+			<a-entity id="terrain">
+				<a-obj-model
+					id="ground"
+					src="#ground-obj"
+					mtl=""
+					position="-7 -1 -11"
+					rotation="0 0 0"
+					scale="4 4 4"
+					shadow
+					material="src: #groundtex; roughness: 1; metalness: 0">
+				</a-obj-model>
 
-			<a-box id="lake" height=".5" width="40" depth="40"
-				position="-14.94 -1.98 -7.64"
-				rotation="0 0 0"
-				material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
-			</a-box>
+				<a-box id="lake" height=".5" width="40" depth="40"
+					position="-14.94 -1.98 -7.64"
+					rotation="0 0 0"
+					material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
+				</a-box>
+			</a-entity>
 
 			<a-entity id="campsite">
 				<a-obj-model
@@ -111,8 +91,8 @@ Task/Idea List:
 					position="1.469 -.536 12.314"
 					rotation="0 0 0">
 					<a-video id="vidscreen" src="#tutorialvid" width=".8" height=".45" position="0 .692 0" rotation="-30 110 0"></a-video>
-					<a-box id="playbutton" class="link" color="green" scale=".2 .2 .2" position=".04 -.427 -.6" vid-control="on: click; cmd: play"></a-box>
-					<a-cylinder id="stump" radius=".4"></a-cylinder>
+					<a-box id="playbutton" class="link" shadow color="green" scale=".2 .2 .2" position=".04 -.427 -.6" vid-control="on: click; cmd: play"></a-box>
+					<a-cylinder id="stump" shadow radius=".4"></a-cylinder>
 				</a-entity>
 			</a-entity>
 
@@ -353,17 +333,9 @@ Task/Idea List:
 					</a-obj-model>
 				</a-entity>
 			</a-entity>
-			<!-- Testing for reflective water on lake
-			<a-box id="test" height="1" width="1" depth="1"
-				position="0 0 -2"
-				rotation="0 0 0"
-				material="color: white; roughness: 0; metalness: 1; sphericalEnvMap: #reflection">
-			</a-box>
-		-->
 
 			<!-- Links To Trees -->
-			<a-entity
-				id="linklist"
+			<a-entity id="linklist"
 				position="1.3 .5 -2"
 				rotation="0 -60 0">
 				<a-link
