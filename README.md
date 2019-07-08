@@ -13,7 +13,11 @@ Author: Matt Gibson
 
 # NOTES
 -Don't forget a video sub-folder that includes the video THISIntrocutionv1.mp4 (Github only takes up to 25mb)
+
 -To update the uploaded version, copy and rename the desktop version html, then:
+	
 	-upload resources to Amazon S3
+	
 	-update links in html
+	
 	-rename html and post to S3
