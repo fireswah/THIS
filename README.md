@@ -1,5 +1,5 @@
 # THIS
-Tree Hazard Identification Simulation home.
+Tree Hazard Identification Simulation Home Menu.
 
 NRTC's Tree Hazard Identification Simulation is designed as a portal to access
 numerous Tree Hazard Identification simulations utilizing Virtual Reality.
