@@ -25,13 +25,13 @@
 				<a-asset-item id="firering-obj" src="models/firering.obj"></a-asset-item>
 				<a-asset-item id="subalp-obj" src="models/subalp.obj"></a-asset-item>
 				<a-asset-item id="sign" src="models/NFSign.obj"></a-asset-item>
-				<video id="tutorialvid" src="video/THISIntroductionv1.mp4"></video>
+				<video id="tutorialvid" src="videos/THISIntroductionv1.mp4"></video>
 			</a-assets>
 
 			<!-- Setup Camera And Cursor -->
 			<a-entity
 				id="camerarig"
-				position="5.3 1.6 11.123"
+				position="28.479 1.6 41.650"
 				rotation="0 106 0">
 				<a-camera id="camera"
 					look-controls
@@ -66,24 +66,25 @@
 					mtl=""
 					position="-7 -1 -11"
 					rotation="0 0 0"
-					scale="4 4 4"
+					scale="10 10 10"
 					shadow
 					material="src: #groundtex; roughness: 1; metalness: 0">
 				</a-obj-model>
 
-				<a-box id="lake" height=".5" width="40" depth="40"
-					position="-14.94 -1.98 -7.64"
+				<a-box id="lake" height=".5" width="150" depth="150"
+					position="-14.94 -2.893 -7.64"
 					rotation="0 0 0"
 					material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
 				</a-box>
 			</a-entity>
 
-			<a-entity id="campsite">
+			<a-entity id="campsite"
+				position="15.739 0 31.521">
 				<a-obj-model
 					id="firering"
 					src="#firering-obj"
 					mtl=""
-					position="2.45 -1.47 9.16"
+					position="4.23 -1.36 9.133"
 					rotation="0 0 0"
 					scale=".1 .1 .1"
 					shadow
