@@ -353,28 +353,56 @@
 				</a-entity>
 			</a-entity>
 
-			<!-- Links To Trees -->
-			<a-entity id="linklist"
-				position="5.466 .5 4.658"
-				rotation="0 0 0">
-				<a-link
-					href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/Rec1/rec1.html"
-					id="rec1link"
-					class="link"
-					title="Rec 1"
-					position="0 0 0"
-					rotation="0 0 0"
-					scale=".2 .2 .2">
-				</a-link>
-				<a-link
-					href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/AmbroseSaddle/ambrosesaddle.html"
-					id="ambroselink"
-					class="link"
-					title="Ambrose Saddle"
-					position="1 0 0"
-					rotation="0 0 0"
-					scale=".2 .2 .2">
-				</a-link>
+			<!-- Clump -->
+			<a-entity id="libsign" position="30.5 .85 34" rotation="0 -15 0" shadow>
+				<a-cylinder id="post" position="0 .925 0" radius=".2" height="6"></a-cylinder>
+				<a-box id="nrsign" position="0 3.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Northern Rockies  2" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="nwsign" position="0 2.94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Northwest  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="casign" position="0 2.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="California  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="aksign" position="0 1.94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Alaska  0" position="-.95 0 .15"></a-text></a-box>
+				<a-box id="gbsign" position="0 1.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Great Basin  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="swsign" position="0 .94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Southwest  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="rmsign" position="0 .44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Rocky Mountain  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="esign" position="0 -.06 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Eastern  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<a-box id="ssign" position="0 -.56 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Southern  0" position="-.95 0 .15"></a-text>
+				</a-box>
+				<!-- Links To Northern Rockies Trees -->
+				<a-entity id="linklist"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0">
+					<a-link
+						href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/Rec1/rec1.html"
+						id="rec1link"
+						class="link"
+						title="Rec 1"
+						position="0 0 0"
+						scale=".4 .4 .4">
+					</a-link>
+					<a-link
+						href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/AmbroseSaddle/ambrosesaddle.html"
+						id="ambroselink"
+						class="link"
+						title="Ambrose Saddle"
+						position="1 0 0"
+						scale=".4 .4 .4">
+					</a-link>
+				</a-entity>
 			</a-entity>
 
 		</a-scene>
