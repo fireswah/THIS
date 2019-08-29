@@ -10,6 +10,9 @@
     <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
 		<!-- Videoplayer Componenet -->
 		<script src="scripts/vid-control.js"></script>
+		<!--Menu component -->
+		<script src="scripts/menu-toggle.js"></script>
+
 	</head>
 
 	<body>
@@ -25,13 +28,13 @@
 				<a-asset-item id="firering-obj" src="models/firering.obj"></a-asset-item>
 				<a-asset-item id="subalp-obj" src="models/subalp.obj"></a-asset-item>
 				<a-asset-item id="sign" src="models/NFSign.obj"></a-asset-item>
-				<video id="tutorialvid" src="video/THISIntroductionv1.mp4"></video>
+				<video id="tutorialvid" src="videos/THISIntroductionv1.mp4"></video>
 			</a-assets>
 
 			<!-- Setup Camera And Cursor -->
 			<a-entity
 				id="camerarig"
-				position="5.3 1.6 11.123"
+				position="25.339 1.6 41.65"
 				rotation="0 106 0">
 				<a-camera id="camera"
 					look-controls
@@ -66,24 +69,25 @@
 					mtl=""
 					position="-7 -1 -11"
 					rotation="0 0 0"
-					scale="4 4 4"
+					scale="10 10 10"
 					shadow
 					material="src: #groundtex; roughness: 1; metalness: 0">
 				</a-obj-model>
 
-				<a-box id="lake" height=".5" width="40" depth="40"
-					position="-14.94 -1.98 -7.64"
+				<a-box id="lake" height=".5" width="150" depth="150"
+					position="-14.94 -2.893 -7.64"
 					rotation="0 0 0"
 					material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
 				</a-box>
 			</a-entity>
 
-			<a-entity id="campsite">
+			<a-entity id="campsite"
+				position="15.739 0 31.521">
 				<a-obj-model
 					id="firering"
 					src="#firering-obj"
 					mtl=""
-					position="2.45 -1.47 9.16"
+					position="4.23 -1.36 9.133"
 					rotation="0 0 0"
 					scale=".1 .1 .1"
 					shadow
@@ -91,8 +95,8 @@
 				</a-obj-model>
 				<a-cylinder id="stump" position="1.469 -.536 12.314" shadow radius=".4"></a-cylinder>
 				<a-entity id="signrig"
-					position="2.664 -.832 15.014"
-					rotation="0 166 0">
+					position="6 -.8 14.5"
+					rotation="0 180 0">
 					<a-text value="WELCOME" position="-2.055 4.406 .215" scale="" color=""></a-text>
 					<a-text value="Tree Hazard Identification Simulation" position="-2.055 3.966 .215" scale="" color=""></a-text>
 					<a-video id="vidscreen" src="#tutorialvid" width="3.2" height="1.6" position="-.094 2.898 .25" rotation="0 0 0">
@@ -116,7 +120,7 @@
 
 			<a-entity id="vegetation">
 				<!-- Clump -->
-				<a-entity id="clump1">
+				<a-entity id="clump1" scale="2.5 2.5 2.5" position="0 0 11.967">
 					<a-obj-model
 						id="tree1"
 						src="#subalp-obj"
@@ -160,7 +164,7 @@
 				</a-entity>
 
 				<!-- CLUMP -->
-				<a-entity id="clump2">
+				<a-entity id="clump2" scale="2.5 2.5 2.5" position="16.509 0 15.796">
 					<a-obj-model
 						id="tree5"
 						src="#subalp-obj"
@@ -224,7 +228,7 @@
 				</a-entity>
 
 				<!-- CLUMP -->
-				<a-entity id="clump3">
+				<a-entity id="clump3" scale="2.5 2.5 2.5" position="14.843 3.684 15.572">
 					<a-obj-model
 						id="tree11"
 						src="#subalp-obj"
@@ -288,7 +292,7 @@
 				</a-entity>
 
 				<!-- Clump -->
-				<a-entity id="clump4">
+				<a-entity id="clump4" scale="2.5 2.5 2.5" position="3.318 2.54 3.832">
 					<a-obj-model
 						id="tree17"
 						src="#subalp-obj"
@@ -352,28 +356,125 @@
 				</a-entity>
 			</a-entity>
 
-			<!-- Links To Trees -->
-			<a-entity id="linklist"
-				position="5.466 .5 4.658"
-				rotation="0 0 0">
-				<a-link
-					href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/Rec1/rec1.html"
-					id="rec1link"
-					class="link"
-					title="Rec 1"
-					position="0 0 0"
-					rotation="0 0 0"
-					scale=".2 .2 .2">
-				</a-link>
-				<a-link
-					href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/AmbroseSaddle/ambrosesaddle.html"
-					id="ambroselink"
-					class="link"
-					title="Ambrose Saddle"
-					position="1 0 0"
-					rotation="0 0 0"
-					scale=".2 .2 .2">
-				</a-link>
+			<!-- Clump -->
+			<a-entity id="libsign" position="30.5 .85 34" rotation="0 -15 0" shadow>
+				<a-cylinder id="post" position="0 .925 0" radius=".2" height="6"></a-cylinder>
+				<a-box id="aksign" position="0 3.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Alaska  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="akbutton" class="link" menu-toggle="linklist: #aklinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="casign" position="0 2.94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="California  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="cabutton" class="link" menu-toggle="linklist: #calinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="esign" position="0 2.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Eastern  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="ebutton" class="link" menu-toggle="linklist: #elinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="gbsign" position="0 1.94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Great Basin  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="gbbutton" class="link" menu-toggle="linklist: #gblinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="nrsign" position="0 1.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Northern Rockies  2" position="-.95 0 .15"></a-text>
+					<a-cylinder id="nrbutton" class="link" menu-toggle="linklist: #nrlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="nwsign" position="0 .94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Northwest  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="nwbutton" class="link" menu-toggle="linklist: #nwlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="rmsign" position="0 .44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Rocky Mountain  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="rmbutton" class="link" menu-toggle="linklist: #rmlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="ssign" position="0 -.06 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Southern  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="sbutton" class="link" menu-toggle="linklist: #slinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="swsign" position="0 -.56 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Southwest  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="swbutton" class="link" menu-toggle="linklist: #swlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+
+				<!-- Links To Northern Rockies Trees -->
+				<a-entity id="nrlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-link
+						href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/Rec1/rec1.html"
+						id="rec1link"
+						class="link"
+						title="Rec 1"
+						position="0 0 0"
+						scale=".4 .4 .4">
+					</a-link>
+					<a-link
+						href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/AmbroseSaddle/ambrosesaddle.html"
+						id="ambroselink"
+						class="link"
+						title="Ambrose Saddle"
+						position="1 0 0"
+						scale=".4 .4 .4">
+					</a-link>
+				</a-entity>
+				<a-entity id="nwlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="NW links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="calinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="CA links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="aklinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="AK links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="gblinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="GB links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="swlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="SW links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="rmlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="RM links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="elinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="E links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="slinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="S links to trees here."></a-text>
+				</a-entity>
 			</a-entity>
 
 		</a-scene>
