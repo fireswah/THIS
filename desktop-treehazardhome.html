@@ -60,11 +60,16 @@
 				position="-25 30 -75">
 			</a-entity>
 
-			<a-sky
-				color="#00bfff">
-			</a-sky>
+			<a-sky color="#00bfff"></a-sky>
 
-			<a-text id="credits" value="Here" position="0 3 26" rotation="0 45 0" color="yellow" height="50" width="50"></a-text>
+			<a-entity
+				id="credits"
+				geometry="primitive: plane; width: 50; height: 8"
+				material="color: white; visible: false"
+				text="value: Here; color: yellow; wrapCount: 50; align: center; zOffset: .1"
+				rotation="0 45 0"
+				position="0 0 10">
+			</a-entity>
 
 			<a-entity id="terrain">
 				<a-obj-model
