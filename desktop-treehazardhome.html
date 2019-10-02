@@ -12,6 +12,8 @@
 		<script src="scripts/vid-control.js"></script>
 		<!--Menu component -->
 		<script src="scripts/menu-toggle.js"></script>
+		<!-- Credits component -->
+		<script src="scripts/credits.js"></script>
 
 	</head>
 
@@ -62,6 +64,8 @@
 				color="#00bfff">
 			</a-sky>
 
+			<a-text id="credits" value="Here" position="0 3 26" rotation="0 45 0" color="yellow" height="50" width="50"></a-text>
+
 			<a-entity id="terrain">
 				<a-obj-model
 					id="ground"
@@ -93,7 +97,7 @@
 					shadow
 					material="src: #fireringtex; repeat: 5 5; roughness: 1; metalness: .1">
 				</a-obj-model>
-				<a-cylinder id="stump" position="1.469 -.536 12.314" shadow radius=".4"></a-cylinder>
+				<a-cylinder id="stump" class="link" position="1.469 -.536 12.314" shadow radius=".4" credits="target: #credits"></a-cylinder>
 				<a-entity id="signrig"
 					position="6 -.8 14.5"
 					rotation="0 180 0">
