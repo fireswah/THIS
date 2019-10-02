@@ -1,12 +1,10 @@
 /*
-* Adds/hides/animates a list of credits in THIS home scene
+* Cycles a list of credits in THIS home scene from the hard-coded array below.
 */
-
 AFRAME.registerComponent('credits', {
 	schema: {
-		location: {type: 'vec3', default: {x: 0, y: 0, z: 0}},
+		target: {type: 'selector', default: ''},
 		state: {type: 'boolean', default: false},
-		count: {type: 'int', default: 0}
 	},
 
 	init: function () {
@@ -14,43 +12,55 @@ AFRAME.registerComponent('credits', {
     var el = this.el;
 
 		/*
-		* Update this list for IMPORTANT support actions for THIS
+		* Update this list for support or SME work with THIS
 		*/
-		var specialList = [
-			'A special thank you to the following supporting organizations:',
-			'Northern Rockies Interagency Hotshot Crews',
-			'National Technology and Development Center',
-			'Rocky Mountain Research Station'
+		var thankList = [
+			"A special thank you to the following supporting organizations:",
+			"Northern Rockies Interagency Hotshot Crews",
+			"National Technology and Development Center",
+			"Rocky Mountain Research Station",
+			"USFS National Saw Technical Advisory Group",
+			"Thanks to the following Subject Matter Experts:",
+			"JD Bauman, Missoula Ranger District, Lolo National Forest",
+			"Jake Fallis, Missoula Ranger District, Lolo National Forest",
+			"Ander Jayo, Missoula Ranger District, Lolo National Forest",
+			"Built with:",
+			"A-Frame",
+			"Atom",
+			"Blender",
+			"Google Slides"
 		];
 
-		/*
-		* Update this list for any saw SME work, particularly creating answer keys
-		* for scenes.
-		*/
-		var smeList = [
-			'Thanks to the following Subject Matter Experts:',
-			'JD Bauman, Missoula Ranger District, Lolo National Forest',
-			'Jake Fallis, Missoula Ranger District, Lolo National Forest',
-			'Ander Jayo, Missoula Ranger District, Lolo National Forest'
-		];
+		el.addEventListener('roll-credits', function () {
 
-		el.addEventListener('click', function () {
 			if (data.state === false) {
 				data.state = true;
+				for (var i = 0; i < thankList.length; i++) {
+					let textvalue = thankList[i];
+					let time = 1000;
+					//el.components.credits.timeOut();
+					setTimeout( function () {
+						data.target.setAttribute('value', textvalue);
+						console.log('pop');
+					}, time);
+					time = time + 1000;
+					//data.target.setAttribute('value', textvalue);
+				}
 			}else if (data.state === true) {
 				data.state = false;
+				data.target.setAttribute('value', '');
 			}
 
 		});
+
+		//testing function for text
+		setTimeout(function(){el.emit('roll-credits')}, 3000);
 
 	},
 
 	update: function () {},
 
-	tick: function (time, timeDelta) {
-		var data = this.data;
-
-	},
+	tick: function (time, timeDelta) {},
 
 	remove: function () {},
 
@@ -58,10 +68,8 @@ AFRAME.registerComponent('credits', {
 
 	play: function () {},
 
-	createText: function () {
-
-	},
-
-	animateText: function () {}
+	timeOut: function () {
+		setTimeout( function () {}, 1000);
+	}
 
 });
