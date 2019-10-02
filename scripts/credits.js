@@ -33,18 +33,17 @@ AFRAME.registerComponent('credits', {
 
 		el.addEventListener('roll-credits', function () {
 
+			var time = 1000;
+
 			if (data.state === false) {
 				data.state = true;
 				for (var i = 0; i < thankList.length; i++) {
-					let textvalue = thankList[i];
-					let time = 1000;
-					//el.components.credits.timeOut();
-					setTimeout( function () {
-						data.target.setAttribute('value', textvalue);
-						console.log('pop');
-					}, time);
-					time = time + 1000;
-					//data.target.setAttribute('value', textvalue);
+					//set value of text from list index.
+					var textvalue = thankList[i];
+					//call separate discrete funciton with textvalue and time delay value.
+					el.components.credits.timeOut(textvalue, time);
+					//adds a delay per item in milliseconds.
+					time = time + 3000;
 				}
 			}else if (data.state === true) {
 				data.state = false;
@@ -53,7 +52,8 @@ AFRAME.registerComponent('credits', {
 
 		});
 
-		//testing function for text
+		//testing function for text this emit will activate the credits.
+		//Comment out when using a different object to emit.
 		setTimeout(function(){el.emit('roll-credits')}, 3000);
 
 	},
@@ -68,8 +68,10 @@ AFRAME.registerComponent('credits', {
 
 	play: function () {},
 
-	timeOut: function () {
-		setTimeout( function () {}, 1000);
+	timeOut: function (textvalue, time) {
+		var data = this.data;
+		setTimeout( function () {data.target.setAttribute('text', 'value', textvalue);}, time);
+		//setTimeout( function () {data.target.text.setAttribute('value', textvalue);}, time);
 	}
 
 });
