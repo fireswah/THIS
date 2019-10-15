@@ -10,51 +10,60 @@ AFRAME.registerComponent('credits', {
 	init: function () {
 		var data = this.data;
     var el = this.el;
+		var textBack = data.target.getObject3D('mesh');
+
+		//this.timeouts = [];
 
 		/*
 		* Update this list for support or SME work with THIS
 		*/
 		var thankList = [
-			"A special thank you to the following supporting organizations:",
+			"*_____A special thank you to the following supporting organizations:_____*",
 			"Northern Rockies Interagency Hotshot Crews",
 			"National Technology and Development Center",
 			"Rocky Mountain Research Station",
 			"USFS National Saw Technical Advisory Group",
-			"Thanks to the following Subject Matter Experts:",
+			"*_____Thanks to the following Subject Matter Experts:_____*",
 			"JD Bauman, Missoula Ranger District, Lolo National Forest",
 			"Jake Fallis, Missoula Ranger District, Lolo National Forest",
 			"Ander Jayo, Missoula Ranger District, Lolo National Forest",
-			"Built with:",
+			"*_____Built with:_____*",
 			"A-Frame",
 			"Atom",
 			"Blender",
-			"Google Slides"
+			"Google Slides",
+			"Three.js",
+			"Samsung Gear 360",
+			"Insta360 Pro",
 		];
 
-		el.addEventListener('roll-credits', function () {
+		//Set the text on the selected object from the list.
+		var allText = '';
 
-			var time = 1000;
+		for (var i = 0; i < thankList.length; i++) {
+			var textvalue = thankList[i];
+			allText = allText.concat(textvalue + '\n' + '\n');
+		}
+
+		data.target.setAttribute('text', 'value', allText);
+
+		//Listen for click to start credits.
+		el.addEventListener('click', function () {
 
 			if (data.state === false) {
 				data.state = true;
-				for (var i = 0; i < thankList.length; i++) {
-					//set value of text from list index.
-					var textvalue = thankList[i];
-					//call separate discrete funciton with textvalue and time delay value.
-					el.components.credits.timeOut(textvalue, time);
-					//adds a delay per item in milliseconds.
-					time = time + 3000;
-				}
+				el.emit('roll-credits');
 			}else if (data.state === true) {
 				data.state = false;
-				data.target.setAttribute('value', '');
+				el.components.credits.resetCredits();
 			}
 
 		});
 
-		//testing function for text this emit will activate the credits.
-		//Comment out when using a different object to emit.
-		setTimeout(function(){el.emit('roll-credits')}, 3000);
+		//activate an animated scroll of the credits.
+		el.addEventListener('roll-credits', function () {
+			data.target.setAttribute('animation__1', 'property: position; from: 4.5 -20 25; to: 4.5 50 25; dur: 20000');
+		});
 
 	},
 
@@ -68,10 +77,16 @@ AFRAME.registerComponent('credits', {
 
 	play: function () {},
 
-	timeOut: function (textvalue, time) {
+	//clear the animation and reset position of text.
+	resetCredits: function() {
 		var data = this.data;
-		setTimeout( function () {data.target.setAttribute('text', 'value', textvalue);}, time);
-		//setTimeout( function () {data.target.text.setAttribute('value', textvalue);}, time);
+
+		data.target.removeAttribute('animation__1');
+		data.target.setAttribute('position', {
+			x: 4.5,
+			y: -20,
+			z: 25
+		});
 	}
 
 });
