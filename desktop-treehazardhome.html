@@ -12,6 +12,8 @@
 		<script src="scripts/vid-control.js"></script>
 		<!--Menu component -->
 		<script src="scripts/menu-toggle.js"></script>
+		<!-- Credits component -->
+		<script src="scripts/credits.js"></script>
 
 	</head>
 
@@ -24,10 +26,12 @@
 				<img id="fireringtex" src="images/granitelichen.png">
 				<img id="subalptex" src="images/subalp.png">
 				<img id="signtex" src="images/Grayback.png">
+				<img id="stumptex" src="images/log-round.png">
 				<a-asset-item id="ground-obj" src="models/terrain2.obj"></a-asset-item>
 				<a-asset-item id="firering-obj" src="models/firering.obj"></a-asset-item>
 				<a-asset-item id="subalp-obj" src="models/subalp.obj"></a-asset-item>
 				<a-asset-item id="sign" src="models/NFSign.obj"></a-asset-item>
+				<a-asset-item id="stump-obj" src="models/log-round.obj"></a-asset-item>
 				<video id="tutorialvid" src="videos/THISIntroductionv1.mp4"></video>
 			</a-assets>
 
@@ -41,11 +45,12 @@
 					wasd-controls="fly: true">
 					<a-cursor
 						id="cursor"
+						color="white"
 						animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
 						animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
 						animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
 						event-set__1="_event: mouseenter; color: springgreen"
-						event-set__2="_event: mouseleave; color: black"
+						event-set__2="_event: mouseleave; color: white"
 						fuse="true"
 						raycaster="objects: .link">
 					</a-cursor>
@@ -58,9 +63,15 @@
 				position="-25 30 -75">
 			</a-entity>
 
-			<a-sky
-				color="#00bfff">
-			</a-sky>
+			<a-sky color="#00bfff"></a-sky>
+
+			<a-entity
+				id="credits"
+				material="color: red; visible: true"
+				text="value: ''; color: yellow; wrapCount: 80; align: center; zOffset: .5; width: 40"
+				rotation="0 45 0"
+				position="4.5 -20 25">
+			</a-entity>
 
 			<a-entity id="terrain">
 				<a-obj-model
@@ -93,7 +104,8 @@
 					shadow
 					material="src: #fireringtex; repeat: 5 5; roughness: 1; metalness: .1">
 				</a-obj-model>
-				<a-cylinder id="stump" position="1.469 -.536 12.314" shadow radius=".4"></a-cylinder>
+				<a-obj-model id="stump" class="link" src="#stump-obj" mtl="" position="2.586 -.5 3.49" scale=".75 1 .75" shadow material="src: #stumptex; roughness: .8; metalness: 0" credits="target: #credits"></a-obj-model>
+				<a-obj-model id="stump2" src="#stump-obj" mtl="" position="-.283 -.116 13.71" scale=".5 .75 .5" shadow material="src: #stumptex; roughness: .8; metalness: 0"></a-obj-model>
 				<a-entity id="signrig"
 					position="6 -.8 14.5"
 					rotation="0 180 0">
