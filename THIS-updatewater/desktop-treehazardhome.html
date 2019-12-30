@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>NRTC Tree Hazard Identification Simulation</title>
+		<meta charset="utf-8"/>
+		<!-- Main A-Frame framework -->
+		<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <!-- Event-set Component -->
+    <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+		<!-- Videoplayer Componenet -->
+		<script src="scripts/vid-control.js"></script>
+		<!--Menu component -->
+		<script src="scripts/menu-toggle.js"></script>
+		<!-- Credits component -->
+		<script src="scripts/credits.js"></script>
+		<!--Water glsl -->
+		<script src="scripts/water-mat-component.js"></script>
+
+	</head>
+
+	<body>
+		<a-scene>
+
+			<a-assets>
+				<img id="groundtex" src="images/groundtex.png">
+				<img id="fireringtex" src="images/granitelichen.png">
+				<img id="subalptex" src="images/subalp.png">
+				<img id="signtex" src="images/Grayback.png">
+				<img id="stumptex" src="images/log-round.png">
+				<a-asset-item id="ground-obj" src="models/terrain2.obj"></a-asset-item>
+				<a-asset-item id="firering-obj" src="models/firering.obj"></a-asset-item>
+				<a-asset-item id="subalp-obj" src="models/subalp.obj"></a-asset-item>
+				<a-asset-item id="sign" src="models/NFSign.obj"></a-asset-item>
+				<a-asset-item id="stump-obj" src="models/log-round.obj"></a-asset-item>
+				<video id="tutorialvid" src="videos/THISIntroductionv1.mp4"></video>
+			</a-assets>
+
+			<!-- Setup Camera And Cursor -->
+			<a-entity
+				id="camerarig"
+				position="25.339 1.6 41.65"
+				rotation="0 106 0">
+				<a-camera id="camera"
+					look-controls
+					wasd-controls="fly: true">
+					<a-cursor
+						id="cursor"
+						color="white"
+						animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+						animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+						animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
+						event-set__1="_event: mouseenter; color: springgreen"
+						event-set__2="_event: mouseleave; color: white"
+						fuse="true"
+						raycaster="objects: .link">
+					</a-cursor>
+				</a-camera>
+			</a-entity>
+
+			<!-- Setup Scene -->
+			<a-entity
+				light="type: directional; color: #fdf3d7; intensity: 1; castShadow: true"
+				position="-25 30 -75">
+			</a-entity>
+
+			<a-sky color="#00bfff"></a-sky>
+
+			<a-entity
+				id="credits"
+				material="color: red; visible: true"
+				text="value: ''; color: yellow; wrapCount: 80; align: center; zOffset: .5; width: 40"
+				rotation="0 45 0"
+				position="4.5 -20 25">
+			</a-entity>
+
+			<a-entity id="terrain">
+				<a-obj-model
+					id="ground"
+					src="#ground-obj"
+					mtl=""
+					position="-7 -1 -11"
+					rotation="0 0 0"
+					scale="10 10 10"
+					shadow
+					material="src: #groundtex; roughness: 1; metalness: 0">
+				</a-obj-model>
+<!--
+				<a-box id="lake" height=".5" width="150" depth="150"
+					position="-14.94 -2.893 -7.64"
+					rotation="0 0 0"
+					material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
+				</a-box>
+-->
+				<!-- Lake Test -->
+				<a-entity id="lake">
+					<a-plane position="-14.94 -2.893 -7.64" rotation="-90 0 0" color="green" width="150"
+						height="150" segments-height="20" segments-width="20"
+						water-mat="fogcolor: 0 0 .3; fogdensity: 0.02">
+					</a-plane>
+				</a-entity>
+
+			<a-entity id="campsite"
+				position="15.739 0 31.521">
+				<a-obj-model
+					id="firering"
+					src="#firering-obj"
+					mtl=""
+					position="4.23 -1.36 9.133"
+					rotation="0 0 0"
+					scale=".1 .1 .1"
+					shadow
+					material="src: #fireringtex; repeat: 5 5; roughness: 1; metalness: .1">
+				</a-obj-model>
+				<a-obj-model id="stump" class="link" src="#stump-obj" mtl="" position="2.586 -.5 3.49" scale=".75 1 .75" shadow material="src: #stumptex; roughness: .8; metalness: 0" credits="target: #credits"></a-obj-model>
+				<a-obj-model id="stump2" src="#stump-obj" mtl="" position="-.283 -.116 13.71" scale=".5 .75 .5" shadow material="src: #stumptex; roughness: .8; metalness: 0"></a-obj-model>
+				<a-entity id="signrig"
+					position="6 -.8 14.5"
+					rotation="0 180 0">
+					<a-text value="WELCOME" position="-2.055 4.406 .215" scale="" color=""></a-text>
+					<a-text value="Tree Hazard Identification Simulation" position="-2.055 3.966 .215" scale="" color=""></a-text>
+					<a-video id="vidscreen" src="#tutorialvid" width="3.2" height="1.6" position="-.094 2.898 .25" rotation="0 0 0">
+						<a-entity id="vidcontrols" position="0 -.91 0">
+							<a-triangle id="playbutton" class="link" shadow color="red" scale=".2 .2 .2" position="-.3 0 0" rotation="0 0 270" vid-control="on: click; cmd: play"></a-triangle>
+							<a-entity id="rewindbutton" position=".5 0 0" rotation="0 0 90">
+								<a-triangle color="red" scale=".2 .2 .2" position="0 .172 0" class="link" vid-control="on: click; cmd: rewind"></a-triangle>
+								<a-triangle color="red" scale=".2 .2 .2" position="0 0 0" class="link" vid-control="on: click; cmd: rewind"></a-triangle>
+							</a-entity>
+						</a-entity>
+					</a-video>
+					<a-obj-model id="woodsign"
+						src="#sign"
+						mtl=""
+						shadow
+						scale=".6 .6 .6"
+						material="src: #signtex; roughness: 1; metalness: .1">
+					</a-obj-model>
+				</a-entity>
+			</a-entity>
+
+			<a-entity id="vegetation">
+				<!-- Clump -->
+				<a-entity id="clump1" scale="2.5 2.5 2.5" position="0 0 11.967">
+					<a-obj-model
+						id="tree1"
+						src="#subalp-obj"
+						mtl=""
+						position="2.45 -1.17 -12.85"
+						rotation="0 0 0"
+						scale="4 2.6 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree2"
+						src="#subalp-obj"
+						mtl=""
+						position="3.02 -1.12 -10.53"
+						rotation="0 15 6"
+						scale="2 1.6 2"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree3"
+						src="#subalp-obj"
+						mtl=""
+						position="1.55 -1.29 -13.82"
+						rotation="0 30 0"
+						scale="2.8 4 2.8"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree4"
+						src="#subalp-obj"
+						mtl=""
+						position=".81 -1.08 -12.18"
+						rotation="-4 15 0"
+						scale="3.2 2.6 3.2"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+				</a-entity>
+
+				<!-- CLUMP -->
+				<a-entity id="clump2" scale="2.5 2.5 2.5" position="16.509 0 15.796">
+					<a-obj-model
+						id="tree5"
+						src="#subalp-obj"
+						mtl=""
+						position="-8.17 -.18 23.43"
+						rotation="0 45 0"
+						scale="2.6 4 2.6"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree6"
+						src="#subalp-obj"
+						mtl=""
+						position="-6.78 .43 19.5"
+						rotation="-3.4 0 .3"
+						scale="2.8 4.2 2.8"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree7"
+						src="#subalp-obj"
+						mtl=""
+						position="-11.57 1.32 19.8"
+						rotation="0 15 0"
+						scale="3 2.4 3"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree8"
+						src="#subalp-obj"
+						mtl=""
+						position="-12.18 -1.24 14.46"
+						rotation="-4 15 0"
+						scale="4 4.4 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree9"
+						src="#subalp-obj"
+						mtl=""
+						position="-13.28 -1.27 11.96"
+						rotation="0 30 0"
+						scale="2.4 2.4 2.4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree10"
+						src="#subalp-obj"
+						mtl=""
+						position="-16.06 -1.4 12.37"
+						rotation="4 15 0"
+						scale="4 3.6 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+				</a-entity>
+
+				<!-- CLUMP -->
+				<a-entity id="clump3" scale="2.5 2.5 2.5" position="14.843 3.684 15.572">
+					<a-obj-model
+						id="tree11"
+						src="#subalp-obj"
+						mtl=""
+						position="-27.56 -1.13 -17.7"
+						rotation="0 45 0"
+						scale="2.6 4 2.6"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree12"
+						src="#subalp-obj"
+						mtl=""
+						position="-35.17 -1.18 -12.779"
+						rotation="-3.4 0 .3"
+						scale="2.8 4.2 2.8"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree13"
+						src="#subalp-obj"
+						mtl=""
+						position="-29.74 .32 -16.71"
+						rotation="0 15 0"
+						scale="3 2.4 3"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree14"
+						src="#subalp-obj"
+						mtl=""
+						position="-25.28 -1.3 -32.23"
+						rotation="-4 15 0"
+						scale="4 4.4 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree15"
+						src="#subalp-obj"
+						mtl=""
+						position="-34.88 2.3 -21.8"
+						rotation="0 30 0"
+						scale="2.4 2.4 2.4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree16"
+						src="#subalp-obj"
+						mtl=""
+						position="-41.6 2.13 -23.39"
+						rotation="4 15 0"
+						scale="4 3.6 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+				</a-entity>
+
+				<!-- Clump -->
+				<a-entity id="clump4" scale="2.5 2.5 2.5" position="3.318 2.54 3.832">
+					<a-obj-model
+						id="tree17"
+						src="#subalp-obj"
+						mtl=""
+						position="-36.46 -1.34 1.16"
+						rotation="0 0 0"
+						scale="4 2.6 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree18"
+						src="#subalp-obj"
+						mtl=""
+						position="-30.81 -1.12 4"
+						rotation="0 15 6"
+						scale="2 1.6 2"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree19"
+						src="#subalp-obj"
+						mtl=""
+						position="-34.69 -.34 21.25"
+						rotation="0 30 0"
+						scale="2.8 4 2.8"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree20"
+						src="#subalp-obj"
+						mtl=""
+						position="-42.6 -.75 9.3"
+						rotation="-4 15 0"
+						scale="3.2 2.6 3.2"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree21"
+						src="#subalp-obj"
+						mtl=""
+						position="-29.48 1.8 22.86"
+						rotation="0 30 0"
+						scale="2.4 2.4 2.4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+					<a-obj-model
+						id="tree22"
+						src="#subalp-obj"
+						mtl=""
+						position="-34.25 .04 13.23"
+						rotation="4 15 0"
+						scale="4 3.6 4"
+						shadow
+						material="src: #subalptex; roughness: 1; metalness: .1; transparent: true; alphaTest: .8; side: double">
+					</a-obj-model>
+				</a-entity>
+			</a-entity>
+
+			<!-- Clump -->
+			<a-entity id="libsign" position="30.5 .85 34" rotation="0 -15 0" shadow>
+				<a-cylinder id="post" position="0 .925 0" radius=".2" height="6"></a-cylinder>
+				<a-box id="aksign" position="0 3.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Alaska  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="akbutton" class="link" menu-toggle="linklist: #aklinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="casign" position="0 2.94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="California  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="cabutton" class="link" menu-toggle="linklist: #calinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="esign" position="0 2.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Eastern  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="ebutton" class="link" menu-toggle="linklist: #elinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="gbsign" position="0 1.94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Great Basin  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="gbbutton" class="link" menu-toggle="linklist: #gblinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="nrsign" position="0 1.44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Northern Rockies  2" position="-.95 0 .15"></a-text>
+					<a-cylinder id="nrbutton" class="link" menu-toggle="linklist: #nrlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="nwsign" position="0 .94 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Northwest  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="nwbutton" class="link" menu-toggle="linklist: #nwlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="rmsign" position="0 .44 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Rocky Mountain  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="rmbutton" class="link" menu-toggle="linklist: #rmlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="ssign" position="0 -.06 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Southern  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="sbutton" class="link" menu-toggle="linklist: #slinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+				<a-box id="swsign" position="0 -.56 .216" height=".4" width="2.5" depth=".2">
+					<a-text value="Southwest  0" position="-.95 0 .15"></a-text>
+					<a-cylinder id="swbutton" class="link" menu-toggle="linklist: #swlinklist" position="-1.1 0 .07" rotation="-90 0 0" radius=".14" height=".2" color="red" material="emissive: #ff0000; emissiveIntensity: .5" ></a-cylinder>
+				</a-box>
+
+				<!-- Links To Northern Rockies Trees -->
+				<a-entity id="nrlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-link
+						href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/Rec1/rec1.html"
+						id="rec1link"
+						class="link"
+						title="Rec 1"
+						position="0 0 0"
+						scale=".4 .4 .4">
+					</a-link>
+					<a-link
+						href="https://ntdpvr.s3-us-west-2.amazonaws.com/NRTC+VR+Tree+Sizeup/AmbroseSaddle/ambrosesaddle.html"
+						id="ambroselink"
+						class="link"
+						title="Ambrose Saddle"
+						position="1 0 0"
+						scale=".4 .4 .4">
+					</a-link>
+				</a-entity>
+				<a-entity id="nwlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="NW links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="calinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="CA links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="aklinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="AK links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="gblinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="GB links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="swlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="SW links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="rmlinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="RM links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="elinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="E links to trees here."></a-text>
+				</a-entity>
+				<a-entity id="slinklist"
+					class="linkdisplay"
+					position="2.3 3.3 .23"
+					rotation="0 -25 0"
+					visible="false">
+					<a-text value="S links to trees here."></a-text>
+				</a-entity>
+			</a-entity>
+
+		</a-scene>
+	</body>
+</html>
