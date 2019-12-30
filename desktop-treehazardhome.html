@@ -5,7 +5,7 @@
 		<title>NRTC Tree Hazard Identification Simulation</title>
 		<meta charset="utf-8"/>
 		<!-- Main A-Frame framework -->
-		<script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+		<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
     <!-- Event-set Component -->
     <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
 		<!-- Videoplayer Componenet -->
@@ -14,6 +14,8 @@
 		<script src="scripts/menu-toggle.js"></script>
 		<!-- Credits component -->
 		<script src="scripts/credits.js"></script>
+		<!--Water glsl -->
+		<script src="scripts/water-mat-component.js"></script>
 
 	</head>
 
@@ -21,7 +23,6 @@
 		<a-scene>
 
 			<a-assets>
-				<img id="displace" src="images/waterdisplacement.jpg">
 				<img id="groundtex" src="images/groundtex.png">
 				<img id="fireringtex" src="images/granitelichen.png">
 				<img id="subalptex" src="images/subalp.png">
@@ -84,13 +85,20 @@
 					shadow
 					material="src: #groundtex; roughness: 1; metalness: 0">
 				</a-obj-model>
-
+<!--
 				<a-box id="lake" height=".5" width="150" depth="150"
 					position="-14.94 -2.893 -7.64"
 					rotation="0 0 0"
 					material="color: #256d7b; opacity: .9; roughness: .1; metalness: .9; normalMap: #displace; normalScale: .05 .05; normalTextureRepeat: 10 10">
 				</a-box>
-			</a-entity>
+-->
+				<!-- Lake Test -->
+				<a-entity id="lake">
+					<a-plane position="-14.94 -2.893 -7.64" rotation="-90 0 0" color="green" width="150"
+						height="150" segments-height="20" segments-width="20"
+						water-mat="fogcolor: 0 0 .3; fogdensity: 0.02">
+					</a-plane>
+				</a-entity>
 
 			<a-entity id="campsite"
 				position="15.739 0 31.521">
