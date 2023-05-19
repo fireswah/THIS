@@ -1,5 +1,7 @@
 /*
 * Cycles a list of credits in THIS home scene from the hard-coded array below.
+* Sets text from list, sets attribute of selected scene object
+* animates scrolling of list.
 */
 AFRAME.registerComponent('credits', {
 	schema: {
@@ -19,6 +21,7 @@ AFRAME.registerComponent('credits', {
 		*/
 		var thankList = [
 			"*_____A special thank you to the following supporting organizations:_____*",
+			"Northern Rockies Interagency Training Center",
 			"Northern Rockies Interagency Hotshot Crews",
 			"National Technology and Development Center",
 			"Rocky Mountain Research Station",
@@ -27,6 +30,8 @@ AFRAME.registerComponent('credits', {
 			"JD Bauman, Missoula Ranger District, Lolo National Forest",
 			"Jake Fallis, Missoula Ranger District, Lolo National Forest",
 			"Ander Jayo, Missoula Ranger District, Lolo National Forest",
+			"Mike Pennacchio, Missoula Smokejumpers, Region 1",
+			"Steven Latham, Missoula Smokejumpers, Region 1",
 			"*_____Built with:_____*",
 			"A-Frame",
 			"Atom",
@@ -62,7 +67,7 @@ AFRAME.registerComponent('credits', {
 
 		//activate an animated scroll of the credits.
 		el.addEventListener('roll-credits', function () {
-			data.target.setAttribute('animation__1', 'property: position; from: 4.5 -20 25; to: 4.5 50 25; dur: 20000');
+			data.target.setAttribute('animation__1', 'property: position; from: 4.5 -22 25; to: 4.5 55 25; dur: 30000');
 		});
 
 	},
@@ -84,7 +89,7 @@ AFRAME.registerComponent('credits', {
 		data.target.removeAttribute('animation__1');
 		data.target.setAttribute('position', {
 			x: 4.5,
-			y: -20,
+			y: -22,
 			z: 25
 		});
 	}

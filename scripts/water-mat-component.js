@@ -28,8 +28,8 @@ AFRAME.registerComponent('water-mat', {
 			"time": { value: data.time },
 			"height": { value: data.height },
 			"uvScale": { value: data.uvscale },
-			"texture1": { value: textureLoader.load( 'images/cloud.png' ) },
-			"texture2": { value: textureLoader.load( 'images/watertile.jpg' ) }
+			"texture1": { value: textureLoader.load( 'images/home/cloud.png' ) },
+			"texture2": { value: textureLoader.load( 'images/home/watertile.jpg' ) }
 		};
 
 		uniforms[ "texture1" ].value.wrapS = uniforms[ "texture1" ].value.wrapT = THREE.RepeatWrapping;
