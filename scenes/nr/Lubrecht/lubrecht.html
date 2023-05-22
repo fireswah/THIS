@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Lubrecht</title>
+		<meta charset="utf-8"/>
+		<!-- Main A-Frame framework -->
+		<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+		<!-- Event-set Component -->
+		<script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+		<!-- setimage.js fades between photo switches and changes buttons -->
+		<script src="../../../scenes/nr/Lubrecht/scripts/setimage.js"></script>
+		<!-- Interactive Icon -->
+		<script src="../../../scripts/this-popup.js"></script>
+		<!-- Utility
+		<script src="../../../scripts/heading.js"></script>
+-->
+
+	</head>
+	<body>
+		<a-scene>
+			<a-assets>
+				<!-- Audio -->
+				<audio id="click" src="../../../sounds/buttonclick_01.mp3" preload="auto"></audio>
+				<!-- Thumbnails for direction -->
+				<img id="thumbN" src="../../../images/common/NorthThumb.png">
+				<img id="thumbS" src="../../../images/common/SouthThumb.png">
+				<img id="thumbE" src="../../../images/common/EastThumb.png">
+				<img id="thumbW" src="../../../images/common/WestThumb.png">
+				<!--Thumbnails for selected direction -->
+				<img id="selectN" src="../../../images/common/NorthThumbSelect.png">
+				<img id="selectS" src="../../../images/common/SouthThumbSelect.png">
+				<img id="selectE" src="../../../images/common/EastThumbSelect.png">
+				<img id="selectW" src="../../../images/common/WestThumbSelect.png">
+				<!-- Thumbnails for answerkey -->
+				<img id="selectanswer" src="../../../images/common/hazardkeyselect.png">
+				<img id="thumbanswer" src="../../../images/common/hazardkeythumb.png">
+				<!-- Logo Image -->
+				<img id="logo" src="../../../images/common/usfscircle.png">
+				<!-- Icons -->
+				<img id="hazard" src="../../../images/common/hazcircle.png">
+				<!-- 360 Images -->
+				<img id="north" src="pics/LubrechtNorth.jpg">
+				<img id="south" src="pics/LubrechtSouth.jpg">
+				<img id="east" src="pics/LubrechtEast.jpg">
+				<img id="west" src="pics/LubrechtWest.jpg">
+			</a-assets>
+
+			<!-- Setup Camera And Cursor -->
+			<a-entity
+				id="camera"
+				camera=""
+				look-controls=""
+				position=""
+				rotation=""
+				scale=""
+				visible="">
+				<a-cursor
+					id="cursor"
+					color="white"
+					animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+					animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+					animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
+					event-set__1="_event: mouseenter; color: springgreen"
+					event-set__2="_event: mouseleave; color: white"
+					fuse="true"
+					raycaster="objects: .link">
+				</a-cursor>
+				<!--Utility
+				<a-entity id="cursor2" cursor raycaster="showLine: true; objects: .sky" heading-tool></a-entity>
+			-->
+			</a-entity>
+
+			<!-- Setup Skybox -->
+			<a-sky
+				class="sky"
+				id="image360"
+				radius="10"
+				src="#south"
+				position=""
+				rotation="0 63 0"
+				data-set-image-fade-setup="true"
+				animation__fadein="startEvents: fadein; property: material.color; from: #000; to: #FFF; dur: 300"
+				animation__fadeout="startEvents: fadeout; property: material.color; from: #FFF; to: #000; dur: 300">
+			</a-sky>
+
+			<!-- Logo -->
+			<a-plane src="#logo" height="3" width="3" rotation="-90 0 0" position="0 -5 0" material="transparent: true"></a-plane>
+
+			<!-- Hazard Markers -->
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h1;
+				 	on: click;
+					pos: -7.84 .04 -6.19;
+					icon: #hazard;
+					title: SMALL SNAG;
+					bestline: Best seen from: WEST;
+					para: There is a small snag west of the tree towards the road under a larger ponderosa pine (and someone standing near it).  Probably not too big of a hazard in terms of our 'cut tree', but could pose a hazard for accessing the area.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h2;
+				 	on: click;
+					pos: .12 8.9 -5.56;
+					icon: #hazard;
+					title: UNSTABLE BRANCH;
+					bestline: Best seen from: ANY;
+					para: Note the branch at the top that is longer than all the others.  Given the condition of the tree, ALL of the branches are hazards, but the long one likely has more weight, and is near the broken top which could additionally compromise the connection to the bole of the tree.\n\nSounding this tree with an axe could also dislodge any branch, or break the longer one easily.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h3;
+				 	on: click;
+					pos: .12 -1.69 -9.83;
+					icon: #hazard;
+					title: COMPROMISED BASE;
+					bestline: Best seen from: SOUTH/WEST;
+					para: Notice the discoloration at the base of this tree.  Where the bark is gone, and the sun hits it, the bole looks like a more solid “gray back”.  However, on the West side of the tree (West view) you can see that it looks much more 'spongy'.  The potential hazard here is that the fiber integrity in the wood could be compromised at, or around the hinge location.  The risk of a barber chair or failed hinge is high.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h4;
+				 	on: click;
+					pos: -.46 -2.35 -9.68;
+					icon: #hazard;
+					title: CRACK AT BASE;
+					bestline: Best seen from: WEST;
+					para: There is a significant crack at the base of this tree that could compromise construction of a proper hinge when felling.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h5;
+				 	on: click;
+					pos: -.16 5.98 -7.99;
+					icon: #hazard;
+					title: BIRD/INSECT HOLES THROUGHOUT;
+					bestline: Best seen from: WEST/ANY;
+					para: Several bird and insect holes can be seen all over the tree.  These can increase the chances of internal rot, potential of the whole tree bole breaking when it lands and decrease overall integrity of the tree.\n\nThere is also a hole just to the right of the crack at the base of the tree.  The hole is a defect that may further compromise hinge construction, or hide more rot inside the tree.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h6;
+				 	on: click;
+					pos: -1.48 -3.57 -9.2;
+					icon: #hazard;
+					title: EXPOSED ROOT SYSTEM;
+					bestline: Best seen from: SOUTH/WEST;
+					para: Notice the small maze of exposed roots south of the base.  These have the potential to 'root pull' when the tree is felled, entangling the sawyer’s feet on escape.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h7;
+				 	on: click;
+					pos: 5.42 -1.55 -8.24;
+					icon: #hazard;
+					title: LAY;
+					bestline: Best seen from: NORTH;
+					para: There are several logs, branches and light slash in the natural lay of the tree.  If the tree hits the debris, objects could fly in any direction.  This is minor in this case, but you should be aware of it.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h8;
+				 	on: click;
+					pos: -.05 1.03 -9.93;
+					icon: #hazard;
+					title: BARK SLOUGH;
+					bestline: Best seen from: ANY;
+					para: Notice the areas where the bark is missing.  Several of these areas on the bole circumnavigate the bole, and increase the chances of a piece or section of bark to detach and fall from the tree at any moment.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h9;
+				 	on: click;
+					pos: -4.88 7.14 -6.99;
+					icon: #hazard;
+					title: DEAD STANDING, BROKEN TOP;
+					bestline: Best seen from: ANY;
+					para: This is obviously a dead standing snag, and the top has previously broken out and fallen.  Further breaks or weak areas will likely be present.\n\nThis tree should be approached with extra caution, even though it doesn’t look that complex.;
+					"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				this-popup="
+					name: h10;
+				 	on: click;
+					pos: 2.17 -1.45 -9.63;
+					icon: #hazard;
+					title: GENERAL ENVIRONMENT - TIME OF DAY;
+					bestline: Best seen from: NORTH/ANY;
+					para: The area looks previously logged, and this tree could also have been hit with logging equipment in the past as well.\n\nWhen looking south from the North View, the lighting makes it hard to see defects at the top of the tree, take a little extra time looking it over carefully from this side.;
+					"
+				visible="false">
+			</a-entity>
+
+			<!-- Photo Link Buttons -->
+			<a-entity
+				id="links"
+				position="0 -4 -3"
+				rotation="-45 0 0">
+				<a-entity
+					id="northbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbN"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #north; iskey: false"
+					sound="on: click; src: #click"
+					position="0 1.2 0">
+				</a-entity>
+				<!-- The initial view is from the South.
+				this button should start on selected graphic -->
+				<a-entity
+					id="southbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #selectS"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #south; iskey: false"
+					sound="on: click; src: #click"
+					position="0 -1.2 0">
+				</a-entity>
+				<!-- The rest of the buttons will have the regular thumb graphic
+				to start -->
+				<a-entity
+					id="eastbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbE"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #east; iskey: false"
+					sound="on: click; src: #click"
+					position=".75 0 0">
+				</a-entity>
+				<a-entity
+					id="westbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbW"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #west; iskey: false"
+					sound="on: click; src: #click"
+					position="-.75 0 0">
+				</a-entity>
+				<a-entity
+					id="answerbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbanswer"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #south; iskey: true"
+					sound="on: click; src: #click"
+					position="2 -2 .3"
+					rotation="-7.5 -25 0">
+				</a-entity>
+				<a-link
+					href="../../../index.html"
+					id="homebutton"
+					class="link"
+					title="Tree Hazard Home"
+					position="-2 -2 .3"
+					rotation="-7.5 25 0"
+					scale=".5 .5 .5">
+				</a-link>
+			</a-entity>
+
+		</a-scene>
+	</body>
+</html>

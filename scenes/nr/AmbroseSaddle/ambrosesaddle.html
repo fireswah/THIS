@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ambrose Saddle</title>
+		<meta charset="utf-8"/>
+		<!-- Main A-Frame framework -->
+		<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+		<!-- Event-set Component -->
+		<script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+		<!-- setimage.js fades between photo switches and changes buttons -->
+		<script src="../../../scenes/nr/AmbroseSaddle/scripts/setimage.js"></script>
+		<!-- Interactive Icon -->
+		<script src="../../../scenes/nr/AmbroseSaddle/scripts/interactive-icon.js"></script>
+
+	</head>
+	<body>
+		<a-scene>
+			<a-assets>
+				<!-- Audio -->
+				<audio id="click" src="../../../sounds/buttonclick_01.mp3" preload="auto"></audio>
+				<!-- Thumbnails for direction -->
+				<img id="thumbN" src="../../../images/common/NorthThumb.png">
+				<img id="thumbS" src="../../../images/common/SouthThumb.png">
+				<img id="thumbE" src="../../../images/common/EastThumb.png">
+				<img id="thumbW" src="../../../images/common/WestThumb.png">
+				<!--Thumbnails for selected direction -->
+				<img id="selectN" src="../../../images/common/NorthThumbSelect.png">
+				<img id="selectS" src="../../../images/common/SouthThumbSelect.png">
+				<img id="selectE" src="../../../images/common/EastThumbSelect.png">
+				<img id="selectW" src="../../../images/common/WestThumbSelect.png">
+				<!-- Thumbnails for answerkey -->
+				<img id="selectanswer" src="../../../images/common/hazardkeyselect.png">
+				<img id="thumbanswer" src="../../../images/common/hazardkeythumb.png">
+				<!-- Logo Image -->
+				<img id="logo" src="../../../images/common/usfscircle.png">
+				<!-- Icons -->
+				<img id="hazard" src="../../../images/common/hazcircle.png">
+				<img id="close" src="../../../images/common/CloseButton.png">
+				<!-- 360 Images -->
+				<img id="north" src="../../../scenes/nr/AmbroseSaddle/pics/AmbroseN.jpg">
+				<img id="south" src="../../../scenes/nr/AmbroseSaddle/pics/AmbroseS.jpg">
+				<img id="east" src="../../../scenes/nr/AmbroseSaddle/pics/AmbroseE.jpg">
+				<img id="west" src="../../../scenes/nr/AmbroseSaddle/pics/AmbroseW.jpg">
+				<!-- Hazard Slides -->
+				<img id="h1" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h1.png">
+				<img id="h2" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h2.png">
+				<img id="h3" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h3.png">
+				<img id="h4" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h4.png">
+				<img id="h5" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h5.png">
+				<img id="h6" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h6.png">
+				<img id="h7" src="../../../scenes/nr/AmbroseSaddle/pics/hazards/h7.png">
+			</a-assets>
+
+			<!-- Setup Camera And Cursor -->
+			<a-entity
+				id="camera"
+				camera=""
+				look-controls=""
+				position=""
+				rotation=""
+				scale=""
+				visible="">
+				<a-cursor
+					id="cursor"
+					color="white"
+					animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+					animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+					animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
+					event-set__1="_event: mouseenter; color: springgreen"
+					event-set__2="_event: mouseleave; color: white"
+					fuse="true"
+					raycaster="objects: .link">
+				</a-cursor>
+			</a-entity>
+
+			<!-- Setup Skybox -->
+			<a-sky
+				id="image360"
+				radius="11"
+				src="#south"
+				position=""
+				rotation="0 55 0"
+				data-set-image-fade-setup="true"
+				animation__fadein="startEvents: fadein; property: material.color; from: #000; to: #FFF; dur: 300"
+				animation__fadeout="startEvents: fadeout; property: material.color; from: #FFF; to: #000; dur: 300">
+			</a-sky>
+
+			<!-- Logo -->
+			<a-plane src="#logo" height="3" width="3" rotation="-90 0 0" position="0 -5 0" material="transparent: true"></a-plane>
+
+			<!-- Markers for hazards -->
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: standhealth; on: click; graphic: #h1; pos: 5.798 3.6 -7.07; icon: #hazard"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: rottenbase; on: click; graphic: #h2; pos: -2.082 -1.91 -8.9; icon: #hazard"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: leaner; on: click; graphic: #h3; pos: 2.715 .117 -8.9; icon: #hazard"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: slope; on: click; graphic: #h4; pos: -2.955 -2.863 -8.9; icon: #hazard"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: widowmaker1; on: click; graphic: #h5; pos: -.551 6.682 -7.149; icon: #hazard"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: slash; on: click; graphic: #h6; pos: 7.744 .101 -6.023; icon: #hazard"
+				visible="false">
+			</a-entity>
+			<a-entity
+				id="hazard"
+				class=""
+				interactive-icon="name: bughits; on: click; graphic: #h7; pos: 6.105 .158 -7.523; icon: #hazard"
+				visible="false">
+			</a-entity>
+
+			<!-- Photo Link Buttons -->
+			<a-entity
+				id="links"
+				position="0 -4 -3"
+				rotation="-45 0 0">
+				<a-entity
+					id="northbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbN"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #north; iskey: false"
+					sound="on: click; src: #click"
+					position="0 1.2 0">
+				</a-entity>
+				<!-- The initial view is from the South.
+				this button should start on selected graphic -->
+				<a-entity
+					id="southbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #selectS"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #south; iskey: false"
+					sound="on: click; src: #click"
+					position="0 -1.2 0">
+				</a-entity>
+				<!-- The rest of the buttons will have the regular thumb graphic
+				to start -->
+				<a-entity
+					id="eastbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbE"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #east; iskey: false"
+					sound="on: click; src: #click"
+					position=".75 0 0">
+				</a-entity>
+				<a-entity
+					id="westbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbW"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #west; iskey: false"
+					sound="on: click; src: #click"
+					position="-.75 0 0">
+				</a-entity>
+				<a-entity
+					id="answerbutton"
+					class="link"
+					geometry="primitive: plane; height: 1; width: 1"
+					material="shader: flat; src: #thumbanswer"
+					event-set__1="_event: mousedown; scale: 1 1 1"
+					event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+					event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+					event-set__4="_event: mouseleave; scale: 1 1 1"
+					set-image="on: click; target: #image360; src: #south; iskey: true"
+					sound="on: click; src: #click"
+					position="2 -2 .3"
+					rotation="-7.5 -25 0">
+				</a-entity>
+				<a-link
+					href="../../../index.html"
+					id="homebutton"
+					class="link"
+					title="Tree Hazard Home"
+					position="-2 -2 .3"
+					rotation="-7.5 25 0"
+					scale=".5 .5 .5">
+				</a-link>
+			</a-entity>
+
+		</a-scene>
+	</body>
+</html>
