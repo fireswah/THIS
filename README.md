@@ -40,8 +40,8 @@ A lot of effort went into the thought of how to get a product like THIS into the
 * setimage.js - Consider adding heading schema to component to more easily assist in initial bearing of image display in development. Would also solve having to have a separate setimage script for each scene.
 * this-popup.js/interactive-icon.js - Remove graphic icon and build programmatic 3D icon. This is needed for both optimization and starting to improve workflow for placement of hazard icons during scene building
 ### Intermediate
-credits.js - remove hard-coding of array by adding an array schema
-credits.js - auto calculate placement, start scroll position based on text array length
+* credits.js - remove hard-coding of array by adding an array schema
+* credits.js - auto calculate placement, start scroll position based on text array length
 ### Minor
 * Logo - Replace FS logo with an official version
 * Home Scene - Improve 3D trees
