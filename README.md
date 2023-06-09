@@ -1,6 +1,7 @@
 # THIS
 Tree Hazard Identification Simulation (THIS) Proof of Concept.
-See it here: [https://fireswah.github.io/THIS/](https://fireswah.github.io/THIS/) or scan the QR
+
+See it here: [https://fireswah.github.io/THIS/](https://fireswah.github.io/THIS/) or scan.
 ![THIS Demo](https://github.com/fireswah/THIS/blob/master/QRTHISGitPage.png)
 
 ## Project Description
