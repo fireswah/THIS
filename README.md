@@ -31,6 +31,7 @@ A lot of effort went into the thought of how to get a product like THIS into the
 * Imagery was tested at varying resolutions and with multiple low and high-end cameras. This boils down to the choice of download data size for high resolution, with the trade-off that small hazards, like bug hit bark, may not be as easy to spot in lower resolution, smaller size photos. The Ambrose Saddle scene is an example with higher resolution photos.
 
 ## Roadmap
+Assuming further work to develop THIS occurs, the following roadmap will help focus the initial revisions.
 ### Optimization
 * Aquire cloud storage and host 360 imagery outside of Git (See Git file limitations [here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github). 
 * Systematically work through all aspects of project and implement programmatic buttons/menus/etc. to replace existing image graphics where possible. this will reduce hosting needs as well as improving user browser load times.
