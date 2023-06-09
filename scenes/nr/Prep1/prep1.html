@@ -4,7 +4,7 @@
 		<title>Prep 1</title>
 		<meta charset="utf-8"/>
 		<!-- Main A-Frame framework -->
-		<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+		<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 		<!-- Event-set Component -->
 		<script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
 		<!-- setimage.js fades between photo switches and changes buttons -->
@@ -46,27 +46,20 @@
 
 			<!-- Setup Camera And Cursor -->
 			<a-entity
-				id="camera"
-				camera=""
-				look-controls=""
-				position=""
-				rotation=""
-				scale=""
-				visible="">
-				<a-cursor
-					id="cursor"
-					color="white"
-					animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
-					animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
-					animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
-					event-set__1="_event: mouseenter; color: springgreen"
-					event-set__2="_event: mouseleave; color: white"
-					fuse="true"
-					raycaster="objects: .link">
-				</a-cursor>
-				<!--Utility
-				<a-entity id="cursor2" cursor raycaster="showLine: true; objects: .sky" heading-tool></a-entity>
-				-->
+				id="camerarig">
+				<a-camera id="camera" look-controls>
+					<a-cursor
+						id="cursor"
+						color="white"
+						animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+						animation__fusing="property: scale; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+						animation__exit="property: scale; startEvents: mouseleave; to: 1 1 1; dur: 150"
+						event-set__1="_event: mouseenter; color: springgreen"
+						event-set__2="_event: mouseleave; color: white"
+						fuse="true"
+						raycaster="objects: .link">
+					</a-cursor>
+				</a-camera>
 			</a-entity>
 
 			<!-- Setup Skybox -->
