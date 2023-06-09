@@ -1,5 +1,6 @@
 # THIS
 Tree Hazard Identification Simulation (THIS) Proof of Concept
+See it here: [https://fireswah.github.io/THIS/](https://fireswah.github.io/THIS/)
 
 ## Project Description
 This Virtual Reality enabled training simulation utilizes AFrame and custom AFrame components to display 360 imagery to assess a tree for hazard identification practice, and includes a 3D modeled "landing page" and design (folder structure) for expandable library system.
