@@ -8,11 +8,11 @@ See it here: [https://fireswah.github.io/THIS/](https://fireswah.github.io/THIS/
 This Virtual Reality enabled training simulation utilizes AFrame and custom AFrame components to display 360 imagery to assess a tree for hazard identification practice, and includes a 3D modeled "landing page" and design (folder structure) for expandable library system.
 
 ## Introduction
-THIS is a collaborative proof of concept project seeking to improve hazard identification while reducing exposure to hazardous trees during training. Design began shortly after the Wildland Fire Lessons Learned Center posted a Tree Felling Accident Analysis, and builds off prior discussions during the Crandall Felling Accident APA 2010.
-__Links currently down at LLC__
+THIS is a collaborative proof of concept project seeking to improve hazard identification while reducing exposure to hazardous trees during training. Design began shortly after the Wildland Fire Lessons Learned Center posted a Tree Felling Accident Analysis in 2020, and builds off prior discussions during the Crandall Felling Accident APA 2010.
+[__Tree Felling Accident Analysis__](https://lessons.fs2c.usda.gov/incident/tree-felling-accident-analysis)
 
 ## Partnerships
-THIS was originally designed at Northern Rockies Training Center with partners at the National Technology and Development Center under the Virtual Reality Pilot Project with the USFS National Saw Technical Advisory Group. Rocky Mountain Research Station provided valuable assistance in original cloud hosting, and the Northern Rockies Interagency Hotshot Programs have assisted in all aspects of this project. W.O. Research, Innovation and Organizational Learning is now looking to potentially deploy THIS soon.
+THIS was originally designed at Northern Rockies Training Center with partners at the National Technology and Development Center under the Virtual Reality Pilot Project with the USFS National Saw Technical Advisory Group. Rocky Mountain Research Station provided valuable assistance in original cloud hosting, the Northern Rockies Interagency Hotshot Programs and W.O. Research, Innovation and Organizational Learning have assisted in all aspects of this project.
 
 ## System Description
 THIS utilizes AFrame and custom AFrame components written in javascript for a web-based, virtual reality (VR) experience of 360 degree imagery (still photos in this project).
